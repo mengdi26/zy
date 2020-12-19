@@ -1,0 +1,108 @@
+git config --global user.name "";
+git config --global user.email "";
+git init
+git add .
+git status
+git commit -m "第一次";
+git reflog 查看版本号
+git reset --hard HEAD^上一个版本
+git reset --hard 后面跟版本号
+git clone
+git remote add origin 地址；关联
+git push -u origin main; 上传
+拉取
+git pull origin  main --allow-unrelated-histories
+git branch切换分支
+git checkout -b main创建main
+git checkout main切到main
+git merge dev合并
+合并之后全删了
+
+
+在实际的工作中有时候自己的提交review后需要再次改动，这时候可以有以下两种方式实现：
+
+
+1.如果提交代码后没有重新git pull，那就直接把要修改的文件修改，然后add
+
+
+ - git add修改后的文件
+
+ - git commit --amend，注意不要修改change id，可改变描述信息。
+
+ - git push，这样在gerrit上就会在上一次的review item下生成一个新的Patch set，然后继续review。
+
+ - 如有代码继续更改的需求，重复以上操作。
+
+2. 如果已经有过git pull了，需要回退到review的的那个commit id, 获取commit id的方法--git log
+
+
+
+ - git reset --hard回commit之前的状态，hard后边接要回退到的commit id的前六位
+
+
+
+ - git add/git commit/git push重新提交review请求到Gerrit
+
+
+
+有时候在git中提交代码时用git status查看会看到很多文件我们并没有修改却显示的是modify，这时因为这些文件的属性在使用的过程中发生了变化，但是实际的内容是没有变化的，这时候为了让这些文件不显示已经被修改。
+
+注意：第一天进公司，拿到仓库地址不管远程仓库有没有代码，先把远程仓库的分支克隆到本地  然后切换到子分支，然后在子分支里面写代码，修复bug   实现一个功能 提交到本地仓库一次，
+         晚上下班之前再切换到主分支，然后合并子分支，最后提交到远程仓库
+
+        git pull origin main(远程分支名) --allow-unrelated-histories
+         以后到公司上班，早上第一件事 ，先从远程仓库拉取代码，拉取到代码之后，再切换到子分支 然后一实现功能，修复bug 实现一个功能，提交本地仓库一次，晚上下班之间再切换到主分支，
+         然后合并子分支，最后提交到远程仓库
+
+
+屏幕适配
+华为   vivo   oppo   三星   小米  品牌
+1080 * 1920	720 * 1280 	1080 * 2265  	1080 * 2265 	1080 * 2340 	720 * 1440 
+分辨率越大屏幕也清晰
+
+单位
+dp = dip 设备独立像素 不同设备有不同的显示效果 用来设置控件宽高
+sp(缩放像素) 主要用于字体的大小  
+px(像素)  
+ pt 1pt = 1/72英寸
+dpi(屏幕密度) 一英寸有多少个像素点
+
+
+密度比 12  16    24  32  48 === 3:4:6:8:12 ====  0.75:1:1.5:2:3
+美工切三套图标 @1x(1倍图)		@3x(3倍图)	@3x(3倍图)
+
+3倍图 放 ndpi里面会出现多少问题?
+高分辨率的图标放到低分辨率的目录里面会出现什么问题? 图标会拉伸放大
+低分辨率的图标放到高分辨率的目录里面会出现什么问题? 图标会压缩缩小
+
+drawable里面放入一些app切图图标资源  mipmap里面放入aap的 logo图标
+
+真实开发的时候:三套图或者二套图   图标(放到对应的目录下面)+背景图(一般放到drawable-hdpi下或者drawable-xhdpi下面就行)
+
+
+
+图片格式 == .9.png(不管如何拉伸如何压缩都不会变形)
+
+
+
+图片适配
+原型图分辨率多少就在bat后缀名的文件夹下放在.jar后,后面加要适配的分辨率机型
+
+
+布局适配(px适配,dp适配(最小宽度限定符适配),今日头条适配方案)
+
+
+单位和分辨率的关系
+在mdpi  320*480 分辨率下 1dp = 1px
+在 hdpi 480 * 800 分辨率下 1dp = 1.5px
+在xhdpi 720 * 120 分辨率下 1dp = 2px
+以此类推
+
+
+主流分辨率:1080 * 1920	   720 * 1280
+蓝湖 账号和密码(app原型图,接口文档,需求文档)
+原先你们公司是已哪个分辨率为基准做的原型图	一定要看下流量研究院中主流分辨率是多少,确定主流分辨率之后,告诉美工 之前公司是以这个主流分辨率为基准做的原型图
+1.明确原型图的分辨率是多少
+根据原型图做布局适配
+
+根据原型图做布局适配
